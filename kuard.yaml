@@ -38,7 +38,7 @@ spec:
   type: NodePort
   ports:
     - port: 8080
-      nodePort: 30880
+      nodePort: 31880
       name: kuard-service
   selector:
     app: kuard
