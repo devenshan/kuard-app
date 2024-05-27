@@ -34,6 +34,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kuard-service
+  namespace: kuard-app
 spec:
   type: NodePort
   ports:
@@ -42,3 +43,19 @@ spec:
       name: kuard-service
   selector:
     app: kuard
+
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: kuard-route
+  namespace: telstra-demo
+spec:
+  host: kuard-route-telstra-demo.apps.mgm2.tmetse.bos2.lab
+  port:
+    targetPort: kuard-service
+  to:
+    kind: Service
+    name: kuard-service
+    weight: 100
+  wildcardPolicy: None
